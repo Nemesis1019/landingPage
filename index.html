@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnóstico de Marketing | Propuesta Personalizada</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --burgundy: #660033;
+      --pink-hot: #E673AC;
+      --green-mid: #469110;
+      --green-dark: #00520A;
+      --champagne: #ECE0DA;
+      --tea-rose: #F1C8CB;
+      --sage: #9CAD8C;
+      --reseda: #7E8C69;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--champagne);
+      color: #2a1a1a;
+      min-height: 100vh;
+    }
+
+    .color-stripe {
+      height: 5px;
+      background: linear-gradient(90deg, var(--burgundy) 0%, var(--pink-hot) 35%, var(--sage) 65%, var(--green-dark) 100%);
+    }
+
+    .hero {
+      background: var(--burgundy);
+      padding: 80px 24px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: var(--pink-hot);
+      opacity: 0.12;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      left: -60px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: var(--green-mid);
+      opacity: 0.15;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      background: var(--pink-hot);
+      color: white;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      color: var(--champagne);
+      line-height: 1.2;
+      max-width: 700px;
+      margin: 0 auto 20px;
+      font-weight: 400;
+    }
+
+    .hero h1 span {
+      color: var(--pink-hot);
+      font-style: italic;
+    }
+
+    .hero p {
+      color: var(--tea-rose);
+      font-size: 16px;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .hero-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 40px;
+    }
+
+    .hero-dots span {
+      display: block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .progress-bar-outer {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: white;
+      padding: 12px 20px;
+      border-bottom: 1px solid #f0e8e4;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .progress-bar-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .progress-label {
+      font-size: 12px;
+      color: var(--sage);
+      white-space: nowrap;
+      font-weight: 500;
+    }
+
+    .progress-track {
+      flex: 1;
+      height: 5px;
+      background: #eee;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--burgundy), var(--pink-hot));
+      border-radius: 10px;
+      transition: width 0.4s ease;
+      width: 11%;
+    }
+
+    .form-wrapper {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 48px 20px 80px;
+    }
+
+    .section-card {
+      background: white;
+      border-radius: 20px;
+      padding: 36px 40px;
+      margin-bottom: 24px;
+      border-left: 5px solid var(--burgundy);
+      box-shadow: 0 2px 20px rgba(102, 0, 51, 0.06);
+      animation: fadeUp 0.5s ease both;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .section-card:nth-child(2) {
+      animation-delay: .05s;
+      border-left-color: var(--pink-hot)
+    }
+
+    .section-card:nth-child(3) {
+      animation-delay: .10s;
+      border-left-color: var(--green-mid)
+    }
+
+    .section-card:nth-child(4) {
+      animation-delay: .15s;
+      border-left-color: var(--green-dark)
+    }
+
+    .section-card:nth-child(5) {
+      animation-delay: .20s;
+      border-left-color: var(--sage)
+    }
+
+    .section-card:nth-child(6) {
+      animation-delay: .25s;
+      border-left-color: var(--burgundy)
+    }
+
+    .section-card:nth-child(7) {
+      animation-delay: .30s;
+      border-left-color: var(--pink-hot)
+    }
+
+    .section-card:nth-child(8) {
+      animation-delay: .35s;
+      border-left-color: var(--reseda)
+    }
+
+    .section-card:nth-child(9) {
+      animation-delay: .40s;
+      border-left-color: var(--green-mid)
+    }
+
+    .section-number {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 6px;
+    }
+
+    .section-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: var(--burgundy);
+      font-weight: 600;
+      margin-bottom: 28px;
+    }
+
+    .field-group {
+      margin-bottom: 22px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: #4a3030;
+      margin-bottom: 8px;
+      letter-spacing: 0.3px;
+    }
+
+    label .req {
+      color: var(--pink-hot);
+      margin-left: 3px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="url"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid #e8dcd8;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: #2a1a1a;
+      background: #fdf9f8;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--pink-hot);
+      box-shadow: 0 0 0 3px rgba(230, 115, 172, 0.12);
+      background: white;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+      line-height: 1.6;
+    }
+
+    select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23660033' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media(max-width:580px) {
+      .two-col {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .option-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 16px;
+      border: 1.5px solid #e8dcd8;
+      border-radius: 10px;
+      cursor: pointer;
+      background: #fdf9f8;
+      transition: all 0.18s;
+      font-size: 13.5px;
+      color: #4a3030;
+      line-height: 1.3;
+    }
+
+    .option-pill:hover {
+      border-color: var(--pink-hot);
+      background: #fff5f9;
+    }
+
+    .option-pill input {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--burgundy);
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .conditional {
+      display: none;
+      margin-top: 16px;
+    }
+
+    .conditional.visible {
+      display: block;
+    }
+
+    .budget-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .budget-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px;
+      border: 1.5px solid #e8dcd8;
+      border-radius: 10px;
+      cursor: pointer;
+      background: #fdf9f8;
+      transition: all 0.18s;
+      font-size: 13px;
+      font-weight: 500;
+      color: #4a3030;
+    }
+
+    .budget-pill:has(input:checked) {
+      border-color: var(--green-mid);
+      background: #f0f7e8;
+      color: var(--green-dark);
+    }
+
+    .submit-section {
+      text-align: center;
+      padding: 48px 20px;
+    }
+
+    .submit-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--burgundy);
+      color: white;
+      border: none;
+      padding: 18px 48px;
+      border-radius: 50px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: all 0.25s;
+      box-shadow: 0 6px 24px rgba(102, 0, 51, 0.25);
+    }
+
+    .submit-btn:hover {
+      background: #4d0026;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(102, 0, 51, 0.35);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .submit-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .thankyou-card {
+      background: var(--burgundy);
+      border-radius: 20px;
+      padding: 52px 40px;
+      text-align: center;
+      color: var(--champagne);
+      margin-bottom: 40px;
+      display: none;
+      animation: fadeUp 0.5s ease;
+    }
+
+    .thankyou-card.visible {
+      display: block;
+    }
+
+    .thankyou-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--pink-hot);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+    }
+
+    .thankyou-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 16px;
+      color: white;
+    }
+
+    .thankyou-card p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--tea-rose);
+      max-width: 460px;
+      margin: 0 auto;
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px 20px;
+      font-size: 12px;
+      color: var(--reseda);
+      background: white;
+      border-top: 1px solid #f0e8e4;
+    }
+
+    footer span {
+      color: var(--pink-hot);
+    }
+
+    .character-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 110px;
+      z-index: 9999;
+      transform: translateX(150%);
+      animation: enterCharacter 0.8s ease forwards;
+      animation-delay: 1s;
+    }
+
+    @keyframes enterCharacter {
+      to {
+        transform: translateX(0);
+      }
+    }
+
+    .character-container img {
+      width: 100%;
+    }
+
+    /* burbuja */
+    .bubble {
+      position: absolute;
+      bottom: 110px;
+      right: 0;
+      background: white;
+      padding: 10px 14px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      font-size: 13px;
+      opacity: 0;
+      transform: translateY(10px) scale(0.95);
+      transition: all .3s ease;
+    }
+
+    .bubble::after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      right: 12px;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 8px solid white;
+    }
+
+    .bubble.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="color-stripe"></div>
+
+  <div class="progress-bar-outer">
+    <div class="progress-bar-inner">
+      <span class="progress-label" id="progressLabel">Sección 1 de 9</span>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-eyebrow">Diagnóstico gratuito</div>
+    <h1>Cuéntame sobre tu marca y te preparo una <span>propuesta personalizada</span></h1>
+    <p>Completa este formulario en menos de 5 minutos. Con tus respuestas podré diseñar una estrategia a la medida de tu
+      negocio.</p>
+    <div class="hero-dots">
+      <span style="background:var(--pink-hot)"></span>
+      <span style="background:var(--champagne);opacity:0.5"></span>
+      <span style="background:var(--sage)"></span>
+    </div>
+  </div>
+
+  <div class="form-wrapper">
+    <form id="mainForm" novalidate>
+
+      <div class="section-card">
+        <div class="section-number">01</div>
+        <h2>Información básica</h2>
+        <div class="two-col">
+          <div class="field-group"><label>Nombre completo <span class="req">*</span></label><input type="text"
+              placeholder="Tu nombre" required></div>
+          <div class="field-group"><label>Nombre de la empresa o marca <span class="req">*</span></label><input
+              type="text" placeholder="Ej: Studio Bloom" required></div>
+        </div>
+        <div class="two-col">
+          <div class="field-group"><label>Cargo dentro de la empresa</label><input type="text"
+              placeholder="Ej: Gerente, Fundador/a"></div>
+          <div class="field-group"><label>Número de contacto <span class="req">*</span></label><input type="tel"
+              placeholder="+57 300 000 0000" required></div>
+        </div>
+        <div class="two-col">
+          <div class="field-group"><label>Correo electrónico <span class="req">*</span></label><input type="email"
+              placeholder="correo@empresa.com" required></div>
+          <div class="field-group"><label>Ciudad / País <span class="req">*</span></label><input type="text"
+              placeholder="Ej: Bogotá, Colombia" required></div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-number">02</div>
+        <h2>Sobre tu negocio</h2>
+        <div class="field-group"><label>¿A qué se dedica tu empresa o marca? <span class="req">*</span></label><textarea
+            placeholder="Cuéntame brevemente qué haces y a quién le vendes..." required></textarea></div>
+        <div class="field-group">
+          <label>¿Cuánto tiempo lleva en el mercado?</label>
+          <div class="options-grid">
+            <label class="option-pill"><input type="radio" name="tiempo" value="menos6"> Menos de 6 meses</label>
+            <label class="option-pill"><input type="radio" name="tiempo" value="6a12"> 6 meses a 1 año</label>
+            <label class="option-pill"><input type="radio" name="tiempo" value="1a3"> 1 a 3 años</label>
+            <label class="option-pill"><input type="radio" name="tiempo" value="mas3"> Más de 3 años</label>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>¿Tienes redes sociales activas actualmente?</label>
+          <div class="options-grid" style="grid-template-columns:auto auto 1fr">
+            <label class="option-pill"><input type="radio" name="redes" value="si"> Sí</label>
+            <label class="option-pill"><input type="radio" name="redes" value="no"> No</label>
+          </div>
+          <div class="conditional" id="redesLinks">
+            <label style="margin-top:0">Comparte tus usuarios o enlaces</label>
+            <input type="url" placeholder="Ej: @tumarca / https://instagram.com/tumarca">
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-number">03</div>
+        <h2>Objetivos de marketing</h2>
+        <div class="field-group">
+          <label>¿Qué te gustaría lograr? <small style="color:var(--sage);font-weight:400">(puedes elegir
+              varios)</small></label>
+          <div class="options-grid">
+            <label class="option-pill"><input type="checkbox" name="objetivo" value="ventas"> Aumentar ventas</label>
+            <label class="option-pill"><input type="checkbox" name="objetivo" value="clientes"> Conseguir más
+              clientes</label>
+            <label class="option-pill"><input type="checkbox" name="objetivo" value="imagen"> Mejorar imagen de
+              marca</label>
+            <label class="option-pill"><input type="checkbox" name="objetivo" value="redes"> Crecer en redes
+              sociales</label>
+            <label class="option-pill"><input type="checkbox" name="objetivo" value="lanzar"> Lanzar un
+              producto/servicio</label>
+            <label class="option-pill"><input type="checkbox" name="objetivo" value="contenido"> Crear contenido
+              profesional</label>
+          </div>
+          <div class="field-group" style="margin-top:14px;margin-bottom:0"><label>Otro objetivo</label><input
+              type="text" placeholder="Especifica si tienes otro objetivo..."></div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-number">04</div>
+        <h2>Servicios de tu interés</h2>
+        <div class="field-group">
+          <label>¿Qué servicio deseas contratar? <small style="color:var(--sage);font-weight:400">(puedes elegir
+              varios)</small></label>
+          <div class="options-grid">
+            <label class="option-pill"><input type="checkbox" name="servicio" value="redes"> Manejo de redes
+              sociales</label>
+            <label class="option-pill"><input type="checkbox" name="servicio" value="contenido"> Creación de
+              contenido</label>
+            <label class="option-pill"><input type="checkbox" name="servicio" value="ads"> Publicidad paga (Meta/Google
+              Ads)</label>
+            <label class="option-pill"><input type="checkbox" name="servicio" value="disenio"> Diseño gráfico</label>
+            <label class="option-pill"><input type="checkbox" name="servicio" value="branding"> Branding</label>
+            <label class="option-pill"><input type="checkbox" name="servicio" value="estrategia"> Estrategia
+              digital</label>
+            <label class="option-pill"><input type="checkbox" name="servicio" value="foto"> Fotografía / video</label>
+          </div>
+          <div class="field-group" style="margin-top:14px;margin-bottom:0"><label>Otro servicio</label><input
+              type="text" placeholder="Especifica si buscas algo diferente..."></div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-number">05</div>
+        <h2>Público objetivo</h2>
+        <div class="field-group"><label>¿Quién es tu cliente ideal?</label><textarea
+            placeholder="Describe a la persona que más te compra o que quieres atraer..."></textarea></div>
+        <div class="field-group">
+          <label>¿Qué edades tiene tu público principal?</label>
+          <div class="options-grid">
+            <label class="option-pill"><input type="checkbox" name="edad" value="18-24"> 18 – 24 años</label>
+            <label class="option-pill"><input type="checkbox" name="edad" value="25-34"> 25 – 34 años</label>
+            <label class="option-pill"><input type="checkbox" name="edad" value="35-44"> 35 – 44 años</label>
+            <label class="option-pill"><input type="checkbox" name="edad" value="45+"> 45 años o más</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-number">06</div>
+        <h2>Presupuesto estimado</h2>
+        <div class="field-group">
+          <label>¿Cuál es tu presupuesto mensual para marketing?</label>
+          <div class="budget-grid">
+            <label class="budget-pill"><input type="radio" name="presupuesto" value="menos500"> Menos de $500.000
+              COP</label>
+            <label class="budget-pill"><input type="radio" name="presupuesto" value="500a1m"> $500.000 –
+              $1.000.000</label>
+            <label class="budget-pill"><input type="radio" name="presupuesto" value="1a2m"> $1.000.000 –
+              $2.000.000</label>
+            <label class="budget-pill"><input type="radio" name="presupuesto" value="mas2m"> Más de $2.000.000
+              COP</label>
+            <label class="budget-pill"><input type="radio" name="presupuesto" value="conv"> Prefiero hablarlo
+              contigo</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-number">07</div>
+        <h2>Competencia y referencias</h2>
+        <div class="field-group"><label>¿Qué marcas o empresas consideras tu competencia directa?</label><textarea
+            placeholder="Puedes mencionar nombres, links o perfiles de Instagram..."></textarea></div>
+        <div class="field-group"><label>¿Hay alguna marca cuyo contenido te guste como referencia?</label><textarea
+            placeholder="¿Qué admiras de esa marca?"></textarea></div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-number">08</div>
+        <h2>Necesidades adicionales</h2>
+        <div class="field-group"><label>¿Qué consideras que hoy necesita mejorar tu marca?</label><textarea
+            placeholder="Sé honesto/a — esto me ayuda a diseñar una propuesta real..."></textarea></div>
+        <div class="field-group"><label>¿Hay algo importante que quieras contarme antes de recibir tu
+            propuesta?</label><textarea placeholder="Cualquier contexto adicional es bienvenido..."></textarea></div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-number">09</div>
+        <h2>Tiempo de inicio</h2>
+        <div class="field-group">
+          <label>¿Cuándo te gustaría comenzar?</label>
+          <div class="options-grid">
+            <label class="option-pill"><input type="radio" name="inicio" value="inmediato"> Inmediatamente</label>
+            <label class="option-pill"><input type="radio" name="inicio" value="estemes"> En este mes</label>
+            <label class="option-pill"><input type="radio" name="inicio" value="1a3meses"> En 1 a 3 meses</label>
+            <label class="option-pill"><input type="radio" name="inicio" value="cotizando"> Solo estoy cotizando</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="thankyou-card" id="thankYou">
+        <div class="thankyou-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <h2>¡Gracias por completar el formulario!</h2>
+        <p>Con esta información podré prepararte una propuesta personalizada según las necesidades reales de tu marca.
+          Me pondré en contacto contigo pronto.</p>
+      </div>
+
+      <div class="submit-section" id="submitSection">
+        <button type="submit" class="submit-btn">
+          Enviar diagnóstico
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </button>
+        <p style="font-size:12px;color:var(--reseda);margin-top:16px;">Tu información es confidencial y solo se usará
+          para preparar tu propuesta.</p>
+      </div>
+    </form>
+  </div>
+
+  <footer>Formulario de diagnóstico para cotización de marketing <span>✦</span> Información confidencial</footer>
+
+  <div class="character-container">
+    <img id="character" src="step1.png">
+    <div class="bubble" id="bubble">
+      ¡Hola! 👋 ¿Te ayudo a completar el formulario?
+    </div>
+  </div>
+
+  <script>
+    const images = [
+    "https://res.cloudinary.com/dlg08hlcb/image/upload/q_auto/f_auto/v1777090533/image1bg_yavhq8.png",
+      "https://res.cloudinary.com/dlg08hlcb/image/upload/q_auto/f_auto/v1777090533/image2bg_hkvvsk.png",
+      "https://res.cloudinary.com/dlg08hlcb/image/upload/q_auto/f_auto/v1777090533/image1bg_yavhq8.png",
+      "https://res.cloudinary.com/dlg08hlcb/image/upload/q_auto/f_auto/v1777090533/image3bg_yvnr3b.png"
+    ];
+
+    let indexChar = 0;
+    const character = document.getElementById("character");
+    const bubble = document.getElementById("bubble");
+
+    function animateCharacter() {
+      if (indexChar < images.length) {
+        character.src = images[indexChar];
+        indexChar++;
+        setTimeout(animateCharacter, 250);
+      } else {
+        setTimeout(() => {
+          bubble.classList.add("show");
+        }, 300);
+      }
+    }
+
+    // iniciar animación
+    window.addEventListener("load", () => {
+      setTimeout(animateCharacter, 1200);
+    });
+
+    // opcional: click en burbuja
+    bubble.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    document.querySelectorAll('input[name="redes"]').forEach(r => {
+      r.addEventListener('change', function () {
+        document.getElementById('redesLinks').classList.toggle('visible', this.value === 'si');
+      });
+    });
+
+    const sections = document.querySelectorAll('.section-card');
+    const fillEl = document.getElementById('progressFill');
+    const labelEl = document.getElementById('progressLabel');
+
+    function updateBar() {
+      const mid = window.scrollY + window.innerHeight * 0.5;
+      let active = 0;
+      sections.forEach((s, i) => { if (s.offsetTop <= mid) active = i + 1; });
+      fillEl.style.width = Math.max(11, Math.round((active / sections.length) * 100)) + '%';
+      labelEl.textContent = `Sección ${Math.max(1, active)} de ${sections.length}`;
+    }
+    window.addEventListener('scroll', updateBar, { passive: true });
+    updateBar();
+
+    document.getElementById('mainForm').addEventListener('submit', e => {
+      e.preventDefault();
+      document.getElementById('submitSection').style.display = 'none';
+      document.getElementById('thankYou').classList.add('visible');
+      document.getElementById('thankYou').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      fillEl.style.width = '100%';
+      labelEl.textContent = '¡Completo!';
+    });
+
+    document.querySelectorAll('.option-pill, .budget-pill').forEach(pill => {
+      const inp = pill.querySelector('input');
+      if (!inp) return;
+      inp.addEventListener('change', () => {
+        if (inp.type === 'radio') {
+          document.querySelectorAll(`input[name="${inp.name}"]`).forEach(s => {
+            const p = s.closest('.option-pill, .budget-pill');
+            if (p) { p.style.borderColor = ''; p.style.background = ''; p.style.color = ''; p.style.fontWeight = ''; }
+          });
+        }
+        pill.style.borderColor = inp.checked ? 'var(--pink-hot)' : '';
+        pill.style.background = inp.checked ? '#fff5f9' : '';
+        pill.style.color = inp.checked ? 'var(--burgundy)' : '';
+        pill.style.fontWeight = inp.checked ? '500' : '';
+      });
+    });
+  </script>
+</body>
+
+</html>
