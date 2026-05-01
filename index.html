@@ -545,7 +545,7 @@
       display: block;
     }
 
-    
+
 
     .thankyou-card-spin.visible {
       display: flex;
@@ -610,6 +610,21 @@
     .character-container img {
       width: 80px;
       height: 210px;
+    }
+
+    @media(max-width:600px) {
+      .character-container img {
+        width: 60px;
+        height: 105px;
+      }
+
+      .character-container {
+       
+        bottom: 20px;
+        right: 20px;
+       
+       
+      }
     }
 
     .bubble {
@@ -948,7 +963,7 @@
             <polyline points="20 6 9 17 4 12"></polyline>
           </svg>
         </div>
-        
+
         <h2>¡Gracias por completar el formulario!</h2>
         <p>Con esta información podré prepararte una propuesta personalizada según las necesidades reales de tu marca.
           Me pondré en contacto contigo pronto.</p>
@@ -958,7 +973,7 @@
         <div class=" spinner" id="spinner"></div>
       </div>
 
-      
+
 
       <div class="submit-section" id="submitSection">
         <button type="submit" class="submit-btn">
@@ -996,7 +1011,7 @@
 
     function redirectToWhatsapp() {
       let text = 'Hola, tengo una consulta sobre el formulario de diagnóstico para la propuesta de marketing.';
-      window.open(`https://wa.me/573045701103?text=${encodeURIComponent(text)}`, '_blank');
+      window.open(`https://wa.me/573046207857?text=${encodeURIComponent(text)}`, '_blank');
     }
     const images = [
       "./images/image2bg.png",
@@ -1050,11 +1065,11 @@
             const p = s.closest('.option-pill, .budget-pill');
             if (p) { p.style.borderColor = ''; p.style.background = ''; p.style.color = ''; p.style.fontWeight = ''; }
           });
-          
+
           const grpId = inp.closest('[id^="grp-"]') && inp.closest('[id^="grp-"]').id;
           if (grpId) clearGroupError(grpId);
         } else {
-        
+
           const grpId = inp.closest('[id^="grp-"]') && inp.closest('[id^="grp-"]').id;
           if (grpId && inp.checked) clearGroupError(grpId);
         }
@@ -1115,7 +1130,7 @@
       let errors = [];
       let firstErrorEl = null;
 
-      
+
       document.querySelectorAll('.field-error').forEach(e => e.classList.remove('field-error'));
       document.querySelectorAll('.field-error-msg.visible').forEach(e => e.classList.remove('visible'));
       document.querySelectorAll('.option-group-error').forEach(e => e.classList.remove('option-group-error'));
@@ -1237,9 +1252,9 @@
 
 
 
-        _token: "FORM_TOKEN",                  
-        _hp: clean('hp-website'),        
-        _iph: ipFingerprint,               
+        _token: "FORM_TOKEN",
+        _hp: clean('hp-website'),
+        _iph: ipFingerprint,
         _elapsed: Date.now(),
         _host: location.host,
       };
@@ -1302,7 +1317,7 @@
       });
 
       document.getElementById('thankYouSpin').classList.remove('visible');
-      
+
       document.getElementById('thankYouSuccess').classList.add('visible');
       document.getElementById('thankYouSuccess').scrollIntoView({ behavior: 'smooth', block: 'center' });
 
