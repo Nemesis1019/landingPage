@@ -612,20 +612,7 @@
       height: 210px;
     }
 
-    @media(max-width:600px) {
-      .character-container img {
-        width: 60px;
-        height: 105px;
-      }
-
-      .character-container {
-       
-        bottom: 20px;
-        right: 20px;
-       
-       
-      }
-    }
+    
 
     .bubble {
       position: absolute;
@@ -655,6 +642,29 @@
     .bubble.show {
       opacity: 1;
       transform: translateY(0) scale(1);
+    }
+
+    @media(max-width:600px) {
+      .character-container img {
+        width: 60px;
+        height: 110px;
+      }
+
+      .character-container {
+       
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+       
+       
+      }
+
+      .bubble{
+        bottom: 120px;
+        right: -10px;
+        font-size: 10px;
+        min-width: 140px;
+      }
     }
 
     .hoverable:hover {
