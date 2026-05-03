@@ -334,6 +334,32 @@
       box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.12) !important;
     }
 
+    .shake {
+      animation: shake 0.4s;
+    }
+
+    @keyframes shake {
+      0% {
+        transform: translateX(0);
+      }
+
+      25% {
+        transform: translateX(-6px);
+      }
+
+      50% {
+        transform: translateX(6px);
+      }
+
+      75% {
+        transform: translateX(-6px);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
+    }
+
     .option-group-error .option-pill,
     .option-group-error .budget-pill {
       border-color: rgba(231, 76, 60, 0.4);
@@ -458,6 +484,31 @@
       color: #4a3030;
     }
 
+    .checkbox-container {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .checkbox-left {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 24px;
+    }
+
+    .checkbox-left input {
+      transform: scale(1.2);
+
+      cursor: pointer;
+      margin-top: 10px
+    }
+
+    .checkbox-right label {
+      cursor: pointer;
+      line-height: 1.5;
+    }
+
     .budget-pill:has(input:checked) {
       border-color: var(--green-mid);
       background: #f0f7e8;
@@ -485,6 +536,12 @@
       letter-spacing: 0.5px;
       transition: all 0.25s;
       box-shadow: 0 6px 24px rgba(102, 0, 51, 0.25);
+    }
+
+    .submit-btn.disabled {
+      opacity: 0.5;
+      
+      box-shadow: none;
     }
 
     .submit-btn:hover {
@@ -985,9 +1042,31 @@
       </div>
 
 
+      <div class="field-group checkbox-container" id="checkbox-group">
+
+        <div class="checkbox-left">
+          <input type="checkbox" name="habeas_data" id="habeas" onchange="manageChange()">
+        </div>
+
+        <div class="checkbox-right">
+          <label for="habeas">
+            Autorizo de manera previa, expresa e informada el tratamiento de mis datos personales
+            por parte de Maira Delgado, conforme a la Ley 1581 de 2012, con la finalidad de
+            contactarme, brindarme información sobre sus servicios de marketing y/o soluciones de software,
+            así como el envío de comunicaciones comerciales.
+
+            He leído y acepto la
+            <a href="/politica-privacidad.html" target="_blank">
+              política de privacidad
+            </a>.
+          </label>
+        </div>
+
+      </div>
+
 
       <div class="submit-section" id="submitSection">
-        <button type="submit" class="submit-btn">
+        <button type="submit" class="submit-btn disabled" id="submitBtn" >
           Enviar diagnóstico
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
             stroke-linejoin="round">
@@ -1010,6 +1089,14 @@
 
   <script>
 
+
+    function manageChange() {
+      const checkbox = document.getElementById('habeas');
+      const submitBtn = document.getElementById('submitBtn');
+      
+      checkbox.checked ? submitBtn.classList.remove('disabled') :  submitBtn.classList.add('disabled')
+      
+    }
     function cleanForm() {
       document.getElementById('mainForm').reset();
       document.querySelectorAll('.option-pill, .budget-pill').forEach(pill => {
@@ -1179,8 +1266,8 @@
       const cargo = document.getElementById('f-cargo');
       if (!cargo.value.trim()) markField('f-cargo', 'err-cargo');
       const tel = document.getElementById('f-tel');
-      if (!tel.value.trim() ) markField('f-tel', 'err-tel');
-      if( tel.value.length < 10) markField('f-tel', 'err-tel-two');
+      if (!tel.value.trim()) markField('f-tel', 'err-tel');
+      if (tel.value.length < 10) markField('f-tel', 'err-tel-two');
       const email = document.getElementById('f-email');
       if (!email.value.trim() || !isValidEmail(email.value.trim())) markField('f-email', 'err-email');
       const ciudad = document.getElementById('f-ciudad');
@@ -1290,6 +1377,27 @@
 
     document.getElementById('mainForm').addEventListener('submit', async e => {
       e.preventDefault();
+
+      const checkbox = document.getElementById('habeas');
+      const checkboxGroup = document.getElementById('checkbox-group');
+
+
+      
+
+
+      if (!checkbox.checked) {
+        e.preventDefault();
+
+
+        checkboxGroup.classList.add('shake');
+
+
+        setTimeout(() => {
+          checkboxGroup.classList.remove('shake');
+        }, 400);
+
+        return;
+      }
       const result = validateForm();
 
       if (!result.valid) {
@@ -1322,9 +1430,9 @@
       document.getElementById('thankYouSpin').scrollIntoView({ behavior: 'smooth', block: 'center' });
       document.getElementById('submitSection').style.display = 'none';
 
-      console.log("Datos enviados");
+      
       const payload = buildPayload();
-      console.log("payload:", payload);
+      
       await fetch("https://script.google.com/macros/s/AKfycbxYXeuK0dMaXpHpHBVOuRS8rEwplzDEDO_wH1np8eicMJJYoadIch9KZiLPDcsAq6b42Q/exec", {
         method: "POST",
 
