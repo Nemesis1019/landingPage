@@ -612,7 +612,7 @@
       height: 210px;
     }
 
-    
+
 
     .bubble {
       position: absolute;
@@ -646,20 +646,20 @@
 
     @media(max-width:600px) {
       .character-container img {
-        width: 60px;
-        height: 110px;
+        width: 70px;
+        height: 170px;
       }
 
       .character-container {
-       
+
         bottom: 20px;
         right: 20px;
         width: 50px;
-       
-       
+
+
       }
 
-      .bubble{
+      .bubble {
         bottom: 120px;
         right: -10px;
         font-size: 10px;
@@ -760,8 +760,9 @@
           </div>
           <div class="field-group">
             <label>Número de contacto <span class="req">*</span></label>
-            <input type="tel" id="f-tel" placeholder="+57 300 000 0000">
+            <input type="tel" id="f-tel" placeholder="+57 300 000 0000" pattern="^\+57\s?3\d{2}\s?\d{3}\s?\d{4}$">
             <div class="field-error-msg" id="err-tel">Este campo es obligatorio</div>
+            <div class="field-error-msg" id="err-tel-two">El número de contacto debe tener al menos 10 dígitos</div>
           </div>
         </div>
         <div class="two-col">
@@ -1044,6 +1045,11 @@
     window.addEventListener("load", () => setTimeout(animateCharacter, 1000));
     bubble.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
+    const inputTel = document.getElementById('f-tel');
+
+    inputTel.addEventListener('input', (e) => {
+      e.target.value = e.target.value.replace(/\D/g, '');
+    });
     document.querySelectorAll('input[name="redes"]').forEach(r => {
       r.addEventListener('change', function () {
         document.getElementById('redesLinks').classList.toggle('visible', this.value === 'si');
@@ -1173,7 +1179,8 @@
       const cargo = document.getElementById('f-cargo');
       if (!cargo.value.trim()) markField('f-cargo', 'err-cargo');
       const tel = document.getElementById('f-tel');
-      if (!tel.value.trim()) markField('f-tel', 'err-tel');
+      if (!tel.value.trim() ) markField('f-tel', 'err-tel');
+      if( tel.value.length < 10) markField('f-tel', 'err-tel-two');
       const email = document.getElementById('f-email');
       if (!email.value.trim() || !isValidEmail(email.value.trim())) markField('f-email', 'err-email');
       const ciudad = document.getElementById('f-ciudad');
